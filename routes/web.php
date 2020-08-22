@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('sign-in', 'UsersController@authentication');
+Route::get('sign-up', 'UsersController@registration');
+Route::get('profile/', 'UsersController@index');
