@@ -190,11 +190,11 @@ return [
 
     'dashboard_url' => 'home',
 
-    'logout_url' => 'logout',
+    'logout_url' => '/sign-out',
 
-    'login_url' => 'login',
+    'login_url' => '/sign-in',
 
-    'register_url' => 'register',
+    'register_url' => '/sign-up',
 
     'password_reset_url' => 'password/reset',
 
@@ -231,11 +231,11 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        // ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -350,6 +350,17 @@ return [
     */
 
     'plugins' => [
+        [
+            'name' => 'Developers resources',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'assets/js/main.js'
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [

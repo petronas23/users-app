@@ -13,36 +13,32 @@ class CheckIsLoggedIn
      * @param  \Closure  $next
      * @return mixed
      */
-	public function isAuth()
-	{
-		if (Session::get('is_authenticated') === 1) {
-			return true;
-		}
-		return false;
-	}
 	
     public function handle($request, Closure $next)
     {
+		// Session::flush();
+		//dd(Session::all());
+		//Session::flush();
         $requestPath = $request->path();
 		
-    	if ($this->isAuth()) {
+    	if (Session::get('is_authenticated') === 1) {
 
 			if ($requestPath !== 'sign-in' && $requestPath !== 'sign-up') {
 				return $next($request);
 			}
 
-			return redirect('profile/users');
+			return redirect('profile');
 
     	} else {
 
             //Config::set('adminlte.plugins', []);
 
-			if ($request->path() === 'sign-in' || $requestPath === 'crm/sign-up') {
+			if ($request->path() === 'sign-in' || $requestPath === 'sign-up') {
 				return $next($request);
 			}
     	}
 
-		dd('here');
+		//dd('here');
     	return abort(404);
         //return $next($request);
     }

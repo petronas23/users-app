@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('sign-in', 'UsersController@authentication');
+
+Route::get('sign-in', 'AuthController@authentication');
+Route::post('sign-in', 'AuthController@ajaxAuthentication');
+Route::post('sign-out', 'AuthController@ajaxLogout');
+
 Route::get('sign-up', 'UsersController@registration');
-Route::get('profile/', 'UsersController@index');
+Route::post('sign-up', 'UsersController@ajaxRegistration');
+
+Route::group( [ 'namespace' => 'Profile','prefix' => 'profile' ], function(){
+    Route::get( '/', 'UsersController@index' );
+});
