@@ -50,7 +50,7 @@ class User extends Model
 
 		$user = $user->toArray();
         $session_array = [
-			'id' => $user['id'],
+			'id_user' => $user['id'],
 			'name' => $user['name'],
 			'is_authenticated' => 1
 		];
@@ -79,7 +79,6 @@ class User extends Model
 			$cnt++;
 		}
         session($user);
-    }
-
-
+	}
+	
 }

@@ -17,6 +17,6 @@ class UsersController extends Controller
         $postData = $request->validated();
         $user = new User;
         
-        return $user->createOrFail($request->validated(), ['email' => $postData['email']]);
+        return $user->createOrFail($postData, ['email' => $postData['email']]);
     } 
 }

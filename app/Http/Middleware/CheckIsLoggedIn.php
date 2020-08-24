@@ -19,27 +19,33 @@ class CheckIsLoggedIn
 		// Session::flush();
 		//dd(Session::all());
 		//Session::flush();
-        $requestPath = $request->path();
-		
-    	if (Session::get('is_authenticated') === 1) {
-
-			if ($requestPath !== 'sign-in' && $requestPath !== 'sign-up') {
-				return $next($request);
-			}
-
+		$requestPath = $request->path();
+		$pathArr = explode('/', $requestPath);
+		if(isset($pathArr[0]) && $pathArr[0] == 'profile' && Session::get('is_authenticated') !== 1){
+			return abort(404);
+		}elseif(Session::get('is_authenticated') === 1 && ($requestPath === 'sign-in' && $requestPath === 'sign-up' )){
 			return redirect('profile');
+		}
 
-    	} else {
+		return $next($request);
+		
+    	// if (Session::get('is_authenticated') === 1) {
 
-            //Config::set('adminlte.plugins', []);
+		// 	if ($requestPath !== 'sign-in' && $requestPath !== 'sign-up' ) {
+		// 		return $next($request);
+		// 	}
 
-			if ($request->path() === 'sign-in' || $requestPath === 'sign-up') {
-				return $next($request);
-			}
-    	}
+		// 	return redirect('profile');
 
-		//dd('here');
-    	return abort(404);
+    	// } else {
+			
+		// 	if ($request->path() === 'sign-in' || $requestPath === 'sign-up' || ) {
+		// 		return $next($request);
+		// 	}
+    	// }
+
+		// dd('here');
+    	// return abort(404);
         //return $next($request);
     }
 }

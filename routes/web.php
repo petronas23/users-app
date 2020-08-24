@@ -25,6 +25,25 @@ Route::post('sign-out', 'AuthController@ajaxLogout');
 Route::get('sign-up', 'UsersController@registration');
 Route::post('sign-up', 'UsersController@ajaxRegistration');
 
-Route::group( [ 'namespace' => 'Profile','prefix' => 'profile' ], function(){
-    Route::get( '/', 'UsersController@index' );
+Route::group( [ 'namespace' => 'Profile', 'prefix' => 'profile' ], function(){
+
+    Route::prefix('subusers')->group(function() {
+        Route::get( '/', 'UsersController@index' );
+        Route::post( '/', 'UsersController@ajaxDatatable' );
+        
+        Route::get( 'ajax-add-subuser-modal', 'UsersController@ajaxAddSubuserModal' );
+        Route::post( 'ajax-add-subuser', 'UsersController@ajaxAddSubuser' );
+    });
+    
+    
 });
+
+Route::get('social-auth/{type}', 'AuthController@redirectToProvider');
+Route::get('social-response/{vk}', 'AuthController@handleProviderCallback');
+
+Route::get('test-view', function () {
+    return '';
+});
+
+//  Route::post( 'subusers/ajax-add-subuser', 'UsersController@ajaxAddSubuser' )->middleware('ajax');
+

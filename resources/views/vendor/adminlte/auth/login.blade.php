@@ -21,8 +21,8 @@
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
-    <form action="{{ $login_url }}" method="post">
-        {{ csrf_field() }}
+    <form action="{{ $login_url }}" method="post" id="loginForm">
+     
 
         {{-- Email field --}}
         <div class="input-group mb-3">
@@ -84,7 +84,16 @@
 
 @section('auth_footer')
     @if($register_url)
-    
+ 
+    <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a class="btn btn-git github-oauth-btn waves-effect waves-light" href="{!! url('/social-auth/github') !!}">
+            <i class="fab fa-github pr-1"></i> Github
+        </a>
+        <a class="btn btn-vk waves-effect waves-light" href="{!! url('/social-auth/vkontakte') !!}">
+            <i class="fab fa-github pr-1"></i> VK
+        </a>
+    </div>
         <p class="my-0">
             <a href="{{ $register_url }} ">
                 {{ __('adminlte::adminlte.register_a_new_membership') }}
@@ -115,38 +124,9 @@
 
     @yield('js')
     <script type="text/javascript">
-            $(function() {
+            // $(function() {
 
-                $('form').on('submit', function(event) {
 
-                    event.preventDefault();
-
-                    var $form = $(this);
-
-                    $.ajax({
-                        url: $form.attr('action'),
-                        headers: {
-                            'X-CSRF-TOKEN': $('token[name="csrf-secret"]').data('key')
-                        },
-                        data: $form.serialize(),
-                        type: $form.attr('method'),
-                        success: function(response) {
-                            window.location.href = window.location.origin + '/profile'
-                        },
-                        error: function(response, xhr, message) {
-                            if(response.status == 422) {
-                                var errorMsg = '';
-                                $.each( response.responseJSON.errors, function( key, value ) {
-                                    errorMsg += value[0] + '\n';
-                                });
-                                alert(errorMsg);
-                            }else{
-                                alert(response.responseJSON.message);
-                            }
-                        }
-                    });
-                });
-
-            });
+            // });
         </script>
 @stop

@@ -14,8 +14,8 @@
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
 @section('auth_body')
-    <form action="{{ $register_url }}" method="post">
-        {{ csrf_field() }}
+    <form action="{{ $register_url }}" method="post" id="regForm">
+       
 
         {{-- Name field --}}
         <div class="input-group mb-3">
@@ -104,39 +104,10 @@
 
     @yield('js')
     <script type="text/javascript">
-            $(function() {
+            // $(function() {
 
-                $('form').on('submit', function(event) {
+                
 
-                    event.preventDefault();
-
-                    var $form = $(this);
-
-                    $.ajax({
-                        url: $form.attr('action'),
-                        headers: {
-                            'X-CSRF-TOKEN': $('token[name="csrf-secret"]').data('key')
-                        },
-                        data: $form.serialize(),
-                        type: $form.attr('method'),
-                        success: function(response) {
-                            alert(response.message);
-                            window.location.href = window.location.origin + '/sign-in'
-                        },
-                        error: function(response, xhr, message) {
-                            if(response.status == 422) {
-                                var errorMsg = '';
-                                $.each( response.responseJSON.errors, function( key, value ) {
-                                    errorMsg += value[0] + '\n';
-                                });
-                                alert(errorMsg);
-                            }else{
-                                alert(response.responseJSON.message);
-                            }
-                        }
-                    });
-                });
-
-            });
+            // });
         </script>
 @stop
