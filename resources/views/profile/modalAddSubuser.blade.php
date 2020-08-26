@@ -6,15 +6,18 @@
 		<!-- general form elements -->
 		<div class="card card-primary">
 		  <div class="card-header">
-			<h3 class="card-title">Add Subuser</h3>
+			<h3 class="card-title">{!! $title !!}</h3>
 		  </div>
 		  <!-- /.card-header -->
 		  <!-- form start -->
-		  <form role="form" method="POST" action="{!! url('/profile/subusers/ajax-add-subuser') !!}" class="ajax-form-submit">
+		  <form role="form" method="POST" action="{!! $action !!}" class="ajax-form-submit">
 			<div class="card-body">
 				<div class="form-group">
 					<label for="exampleInputEmail1">Name</label>
-					<input type="text" name="subuser_name" class="form-control " value="" placeholder="Enter name">
+					<input type="text" name="subuser_name" class="form-control " value="{!! (isset($subuser['name'])) ? $subuser['name'] : '' !!}" placeholder="Enter name">
+					@if(isset($subuser))
+					<input type="hidden" name="subuser_id" class="form-control " value="{!! $subuser['id'] !!}" placeholder="Enter name">
+					@endif
 				</div>
 			</div>
 

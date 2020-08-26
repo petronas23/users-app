@@ -4,13 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Socials extends Model
 {
-    // protected $fillable = [
-    //     'name', 'email', 'password',
-	// ];
+    protected $table = 'auth_types';
 
-    public function user()
+    public function usersAuths()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\UserAuths');
     }
 	
 }

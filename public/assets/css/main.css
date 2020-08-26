@@ -2,3 +2,9 @@
 	color: #fff !important;
 	background-color: #333 !important;
 }
+
+.w_100{width:100px!important}.w_105{width:105px!important}.w_110{width:110px!important}.w_115{width:115px!important}.w_210{width:210px!important}.w_240{width:240px!important}
+
+.ta_l { text-align: left!important; }
+.ta_r { text-align: right!important; }
+.ta_c { text-align: center!important; }

@@ -60,25 +60,4 @@ class User extends Model
 			'message' => 'Auth is success'
 		]);
     }
-
-    public function signIns()
-	{
-		//$user = $this->find('parea16@gmail.com')->subusers();
-		//$user = $this->where('email', 'parea16@gmail.com')->subusers->get()->toArray();
-		$user = $this::find(1)->subuser;
-        dd($user);
-		$cnt = 0;
-
-		foreach ($this->crm_roles as $role) {
-
-			$user['roles'][$cnt] = $role->toArray();
-
-			foreach ($role->crm_permissions as $permission) {
-				$user['roles'][$cnt]['permissions'][] = $permission->toArray();
-			}
-			$cnt++;
-		}
-        session($user);
-	}
-	
 }

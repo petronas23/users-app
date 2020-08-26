@@ -26,16 +26,22 @@ Route::get('sign-up', 'UsersController@registration');
 Route::post('sign-up', 'UsersController@ajaxRegistration');
 
 Route::group( [ 'namespace' => 'Profile', 'prefix' => 'profile' ], function(){
-
+    Route::get( 'user-session-info', 'UsersController@sessionInfoPage' );
+    
     Route::prefix('subusers')->group(function() {
         Route::get( '/', 'UsersController@index' );
         Route::post( '/', 'UsersController@ajaxDatatable' );
+    
+        Route::get( 'ajax-subuser-modal/{id_subuser?}', 'UsersController@ajaxAddSubuserModal' );
+        Route::post( 'add', 'UsersController@ajaxAddSubuser' );
+        Route::post( 'edit', 'UsersController@ajaxEditSubuser' );
+        Route::post( 'remove/{id_subuser}', 'UsersController@ajaxRemoveSubuser' );
+
+        Route::get( 'ajax-modal-attach-socials/{id_subuser}', 'UsersController@modalAttachSocials' );
+        Route::post( 'ajax-attach-socials', 'UsersController@ajaxAttachSocials' );
+        Route::post( 'ajax-attach-socials', 'UsersController@ajaxAttachSocial' );
         
-        Route::get( 'ajax-add-subuser-modal', 'UsersController@ajaxAddSubuserModal' );
-        Route::post( 'ajax-add-subuser', 'UsersController@ajaxAddSubuser' );
     });
-    
-    
 });
 
 Route::get('social-auth/{type}', 'AuthController@redirectToProvider');

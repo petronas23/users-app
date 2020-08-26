@@ -14,7 +14,8 @@ class CreateUsersAuthsTable extends Migration
     public function up()
     {
         Schema::create('users_auths', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            //$table->bigIncrements('id');
+            $table->foreignId('auth_id');
             $table->foreignId('user_id');
             $table->enum('user_type', ['user', 'subuser']);
             $table->timestamp('created_at')->useCurrent();

@@ -23,7 +23,7 @@ class CheckIsLoggedIn
 		$pathArr = explode('/', $requestPath);
 		if(isset($pathArr[0]) && $pathArr[0] == 'profile' && Session::get('is_authenticated') !== 1){
 			return abort(404);
-		}elseif(Session::get('is_authenticated') === 1 && ($requestPath === 'sign-in' && $requestPath === 'sign-up' )){
+		}elseif(Session::get('is_authenticated') === 1 && ($requestPath === 'sign-in' || $requestPath === 'sign-up' )){
 			return redirect('profile');
 		}
 

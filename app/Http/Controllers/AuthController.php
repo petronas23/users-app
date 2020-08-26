@@ -41,6 +41,17 @@ class AuthController extends Controller
     public function handleProviderCallback(Request $reques, $type='')
     {
         $user = Socialite::driver($type)->user();
-        dd($user);
+
+        
+        //dd($user->user);
+        $session = $user->user;
+        $session['is_authenticated'] = 1;
+        $session['social'] = $type;
+
+        session($session);
+
+        return redirect('profile/user-session-info');
+
+        // dd($user->user);
     }
 }

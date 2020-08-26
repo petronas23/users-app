@@ -15,7 +15,7 @@
 				<div class="card-header">
 					<div class="btn-group float-right">
 						<div class="box-tools">
-							<button data-href="{!! url('/profile/subusers/ajax-add-subuser-modal') !!}" type="button" class="btn btn-success ajax-fanxy-modal">
+							<button data-href="{!! url('/profile/subusers/ajax-subuser-modal') !!}" type="button" class="btn btn-success ajax-fanxy-modal">
 								<i class="fa fa-plus"></i>
 							</button>
 						</div>
@@ -75,27 +75,6 @@
 		},
 		ajax: function (data, callback, settings) {
 			
-			// if (!dtFilter) {
-			// 	dtFilter = $('.dt-filter').dtFilters({
-			// 		container: '.dt-filter-container',
-			// 		onDelete: function(){
-			// 			if ($('.filter-plugin-list').children().length === 0)
-			// 			 	$('.dt-filter-container').hide();
-			// 		},
-			// 		callBack: function () {
-			// 			table.draw();
-			// 		}
-			// 	});
-			// }
-
-			// data.filters = dtFilter.getDTFilter();
-
-			// data.filters.forEach(function(x, index) {
-			// 	if(x.name == 'start_date' || x.name == 'end_date') {
-			// 		data.filters[index].value = $('[name="' + x.name + '"]').data('datepicker').getFormattedDate('dd.mm.yyyy');
-			// 	}
-			// });
-
 			$.ajax({
 				dataType: "JSON",
 				type: "POST",
@@ -112,25 +91,48 @@
 		columns: [
             {
 				data: 'id',
-				className: 'va-m ta-c',
+				className: '',
 				visible: false,
 				searchable: false
 			},
 			{
 				data: "name",
-				className: 'va-m ta-c',
+				className: '',
 				sortable: false,
 			},
 			{
 				data: "created_at",
-				className: 'va-m ta-c',
+				className: '',
 				sortable: false,
 			},
 			{
-				data: "user_id",
-				className: 'va-m ta-c',
+				data: "user_auths",
+				className: '',
 				sortable: false,
 				render: function ( data, type, row ) {
+					var socials = ''
+					$.each( row.user_auths, function( key, value ) {
+						socials += value.name +', ';
+					});
+
+					return socials.trim().slice(0,-1);
+				}
+					
+			},
+			{
+				data: "user_id",
+				className: 'ta_c w_240',
+				sortable: false,
+				render: function ( data, type, row ) {
+					return '<div class="btn-group">'+
+                        '<button data-href="'+ window.location.origin +'/profile/subusers/ajax-subuser-modal/'+ row.id +'" type="button" class="btn btn-warning ajax-fanxy-modal">Edit</button>'+
+						'<button data-href="'+ window.location.origin +'/profile/subusers/remove/'+ row.id +'" data-confirm="Are you sure that you want to delete subuser?" data-id="'+ row.id +'" type="button" class="btn btn-danger ajax-btn-action">Delete</button>'+
+						'<button data-href="'+ window.location.origin +'/profile/subusers/ajax-modal-attach-socials/'+ row.id +'" type="button" class="btn btn-primary ajax-fanxy-modal">Socials</button>'+
+					 '</div>'
+					 +
+					 '<div class="btn-group" style="margin-top:5px">'+
+					 	'<button type="button" class="btn btn-secondary">Sign in</button>'+
+                     '</div>';
 					return row.name;
 				}
 			},

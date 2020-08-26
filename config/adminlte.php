@@ -250,21 +250,21 @@ return [
         // ],
         ['header' => 'account_settings'],
         [
-            'text' => 'subusers',
+            'text' => 'Subusers',
             'heading' => 'Subusers',
-            'url'  => 'admin/settings',
+            'url'  => 'profile/subusers',
             'icon' => 'fas fa-fw fa-user'
         ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        // [
+        //     'text' => 'Authentications',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         ['header' => 'labels'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Session Data',
+            'url'  => 'profile/user-session-info',
+            'icon' => 'fas fa-fw fa-info',
         ],
     ],
 
