@@ -16,7 +16,7 @@ class CreateAuthTypesTable extends Migration
         Schema::create('auth_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100);
-            $table->enum('type', ['ok', 'vk', 'facebook']);
+            $table->enum('type', ['vkontakte', 'github']);
             $table->string('client_id', 500);
             $table->string('token', 500);
 

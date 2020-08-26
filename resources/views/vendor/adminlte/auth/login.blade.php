@@ -23,10 +23,10 @@
 @section('auth_body')
     <form action="{{ $login_url }}" method="post" id="loginForm">
      
-
+        <input type="hidden" id="user_group" value="" name="user">
         {{-- Email field --}}
         <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+            <input type="email" name="email" class="ajax-changeed-email form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -84,15 +84,20 @@
 
 @section('auth_footer')
     @if($register_url)
+
+    <div class="users-select text-center">
+        
+  
+    </div>
  
     <div class="social-auth-links text-center">
-        <p>- OR -</p>
+        <!-- <p>- OR -</p>
         <a class="btn btn-git github-oauth-btn waves-effect waves-light" href="{!! url('/social-auth/github') !!}">
             <i class="fab fa-github pr-1"></i> Github
         </a>
         <a class="btn btn-vk waves-effect waves-light" href="{!! url('/social-auth/vkontakte') !!}">
             <i class="fab fa-github pr-1"></i> VK
-        </a>
+        </a> -->
     </div>
         <p class="my-0">
             <a href="{{ $register_url }} ">

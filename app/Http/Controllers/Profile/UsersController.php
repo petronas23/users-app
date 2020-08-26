@@ -174,9 +174,6 @@ class UsersController extends Controller
         return response()->json([
             'message' => 'Authentications changed with success!',
         ], 201);
-
-
-
    }
    
    

@@ -39,12 +39,13 @@ Route::group( [ 'namespace' => 'Profile', 'prefix' => 'profile' ], function(){
 
         Route::get( 'ajax-modal-attach-socials/{id_subuser}', 'UsersController@modalAttachSocials' );
         Route::post( 'ajax-attach-socials', 'UsersController@ajaxAttachSocials' );
-        Route::post( 'ajax-attach-socials', 'UsersController@ajaxAttachSocial' );
         
     });
 });
 
-Route::get('social-auth/{type}', 'AuthController@redirectToProvider');
+Route::post('check-user', 'AuthController@getUsersByEmail');
+
+Route::get('social-auth/{social}/{id_user}/{user_type}', 'AuthController@redirectToProvider');
 Route::get('social-response/{vk}', 'AuthController@handleProviderCallback');
 
 Route::get('test-view', function () {

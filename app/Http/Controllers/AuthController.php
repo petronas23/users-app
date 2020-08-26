@@ -20,8 +20,10 @@ class AuthController extends Controller
     }
     public function ajaxAuthentication(SignInRequest $request)
     {
+        $request->validated();
+
         $userObj = new User;
-        return $user = $userObj->signIn($request->validated());		
+        return $user = $userObj->signIn($request->all());		
     }
 
     public function ajaxLogout()
@@ -31,10 +33,27 @@ class AuthController extends Controller
 			'message' => 'You have successfully logged out!',
 		]);
     }
-    
-    public function redirectToProvider(Request $reques, $type='')
+
+    public function getUsersByEmail(Request $reques)
     {
-        //dd($type);
+        $post = $reques->all();
+
+        $user = User::getUsers($post['email']);
+        if(!$user){
+            return '';
+        }
+        
+        return response()->json($user);
+    }
+    
+    public function redirectToProvider(Request $reques, $type='', $id= '', $user_type='')
+    {
+        Session::flush();
+        $session = [
+            'user_type' => $user_type,
+			'id_user' => $id
+        ];
+        session($session);
         return Socialite::driver($type)->redirect();
     }
 
@@ -42,8 +61,6 @@ class AuthController extends Controller
     {
         $user = Socialite::driver($type)->user();
 
-        
-        //dd($user->user);
         $session = $user->user;
         $session['is_authenticated'] = 1;
         $session['social'] = $type;
@@ -51,7 +68,5 @@ class AuthController extends Controller
         session($session);
 
         return redirect('profile/user-session-info');
-
-        // dd($user->user);
     }
 }

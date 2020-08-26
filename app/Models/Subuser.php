@@ -78,11 +78,21 @@ class Subuser extends Model
 		return $users = Subuser::with(['userAuths' => function ($query) {
 						$query->where('user_type', 'subuser')->leftJoin('auth_types', 'users_auths.auth_id', '=', 'auth_types.id');
 					}])
+					->WhereUserId($cond['id_user'])
 					->limit($default['length'])
 					->start($default['start'])
 					->orderBy($default['field'], $default['dir'])
 					->get()->toArray();
-    }
+	}
+	
+	public function getAllSubusers()
+	{
+		return $users = Subuser::with(['userAuths' => function ($query) {
+					$query->where('user_type', 'subuser')->leftJoin('auth_types', 'users_auths.auth_id', '=', 'auth_types.id');
+				}])
+				->WhereUserId($cond['id_user'])
+				->get()->toArray();
+	}
 
     public function countSubusers($userId)
 	{
