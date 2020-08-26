@@ -14,7 +14,7 @@ class CreateSubuserRequest extends FormRequest
     public function rules()
     {
         return [
-            'subuser_name' => 'required|min:5|max:100',
+            'subuser_name' => 'required|min:2|max:100',
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubuserTable extends Migration
+class CreateSubusersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSubuserTable extends Migration
      */
     public function up()
     {
-        Schema::create('subuser', function (Blueprint $table) {
+        Schema::create('subusers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id');
             $table->string('name', 100);
@@ -30,6 +30,6 @@ class CreateSubuserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subuser');
+        Schema::dropIfExists('subusers');
     }
 }
